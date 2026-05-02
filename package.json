@@ -1,0 +1,49 @@
+{
+  "name": "ksxd-get-cookie",
+  "version": "1.0.0",
+  "description": "快手小店登录后获取 Cookie 的 Electron 桌面工具",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win nsis --x64"
+  },
+  "keywords": [
+    "electron",
+    "cookie",
+    "kuaishou",
+    "kwaixiaodian"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.3.3",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.yml.ksxdgetcookie",
+    "productName": "KSXD Cookie Tool",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "index.html"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

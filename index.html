@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KSXD Cookie Tool</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #f5f7fb;
+        color: #1f2937;
+      }
+
+      .panel {
+        height: 335px;
+        padding: 16px 18px;
+        border-bottom: 1px solid #dbe1ea;
+        background: #ffffff;
+      }
+
+      .title {
+        margin: 0 0 8px;
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .desc {
+        margin: 0 0 8px;
+        color: #4b5563;
+        font-size: 14px;
+      }
+
+      .url {
+        display: inline-block;
+        margin-bottom: 10px;
+        color: #2563eb;
+        font-size: 13px;
+        word-break: break-all;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        margin: 12px 0;
+      }
+
+      button {
+        border: none;
+        border-radius: 8px;
+        padding: 10px 14px;
+        background: #111827;
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      button.secondary {
+        background: #4b5563;
+      }
+
+      button:hover {
+        opacity: 0.92;
+      }
+
+      .status {
+        margin: 0 0 10px;
+        font-size: 14px;
+      }
+
+      .message {
+        min-height: 20px;
+        margin: 0 0 8px;
+        font-size: 13px;
+      }
+
+      .message[data-type="success"] {
+        color: #047857;
+      }
+
+      .message[data-type="warn"] {
+        color: #b45309;
+      }
+
+      .message[data-type="info"] {
+        color: #1d4ed8;
+      }
+
+      textarea {
+        width: 100%;
+        height: 68px;
+        padding: 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        resize: none;
+        font-size: 12px;
+        line-height: 1.5;
+        background: #f8fafc;
+      }
+
+      .sub-block {
+        margin-top: 10px;
+      }
+
+      .sub-title {
+        margin: 0 0 6px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .sub-text {
+        margin: 0 0 6px;
+        font-size: 13px;
+        color: #374151;
+      }
+
+      textarea.raw-response {
+        height: 56px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="panel">
+      <h1 class="title">快手小店 Cookie 获取工具</h1>
+      <p class="desc">在下方页面手动登录，登录成功后会自动尝试提取 Cookie。</p>
+      <span class="url" id="loginUrl"></span>
+      <div class="toolbar">
+        <button id="refreshBtn">手动获取 Cookie</button>
+        <button id="testBtn">测试 Cookie 有效性</button>
+        <button id="copyBtn" class="secondary">复制 Cookie</button>
+        <button id="saveBtn" class="secondary">保存到 TXT</button>
+        <button id="reloadBtn" class="secondary">重新打开登录页</button>
+      </div>
+      <p class="status"><strong>状态：</strong><span id="status">初始化中...</span></p>
+      <p class="message" id="message" data-type="info"></p>
+      <textarea id="cookieText" readonly placeholder="登录成功后，这里会显示拼接后的 Cookie 字符串"></textarea>
+      <div class="sub-block">
+        <p class="sub-title">Cookie 有效性检测</p>
+        <p class="sub-text"><strong>检测结果：</strong><span id="cookieCheckStatus">未检测</span></p>
+        <p class="sub-text" id="cookieCheckDetail">尚未执行 Cookie 有效性测试</p>
+        <textarea
+          id="cookieCheckRaw"
+          class="raw-response"
+          readonly
+          placeholder="这里会显示接口原始响应，便于排查"
+        ></textarea>
+      </div>
+    </section>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
