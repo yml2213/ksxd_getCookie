@@ -199,7 +199,7 @@ function updateViewBounds() {
   }
 
   const [windowWidth, windowHeight] = mainWindow.getContentSize();
-  const topOffset = 210;
+  const topOffset = 286;
   loginView.setBounds({
     x: 0,
     y: topOffset,

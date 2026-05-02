@@ -8,6 +8,17 @@
       :root {
         color-scheme: light;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --bg: #f3f6fb;
+        --panel: rgba(255, 255, 255, 0.92);
+        --panel-border: #d9e2f0;
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --text: #1f2937;
+        --subtext: #5b6475;
+        --success: #047857;
+        --warn: #b45309;
+        --info: #1d4ed8;
+        --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
       }
 
       * {
@@ -16,142 +27,286 @@
 
       body {
         margin: 0;
-        background: #f5f7fb;
-        color: #1f2937;
+        background:
+          radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 22%),
+          radial-gradient(circle at top right, rgba(99, 102, 241, 0.08), transparent 26%),
+          var(--bg);
+        color: var(--text);
       }
 
       .panel {
-        height: 335px;
-        padding: 16px 18px;
+        height: 286px;
+        padding: 16px;
         border-bottom: 1px solid #dbe1ea;
-        background: #ffffff;
+      }
+
+      .shell {
+        display: grid;
+        grid-template-columns: minmax(320px, 1.15fr) minmax(360px, 1fr);
+        gap: 14px;
+        height: 100%;
+      }
+
+      .card {
+        min-width: 0;
+        padding: 16px 18px;
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+      }
+
+      .hero {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary-dark);
+        font-size: 12px;
+        font-weight: 600;
       }
 
       .title {
-        margin: 0 0 8px;
-        font-size: 22px;
-        font-weight: 700;
+        margin: 0;
+        font-size: 28px;
+        font-weight: 750;
+        line-height: 1.2;
       }
 
       .desc {
-        margin: 0 0 8px;
-        color: #4b5563;
+        margin: 10px 0 0;
+        color: var(--subtext);
         font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .link-box {
+        margin-top: 14px;
+        padding: 10px 12px;
+        border: 1px solid #dbe7ff;
+        border-radius: 12px;
+        background: #f8fbff;
+      }
+
+      .link-label,
+      .section-label {
+        margin: 0 0 6px;
+        color: #6b7280;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
       }
 
       .url {
-        display: inline-block;
-        margin-bottom: 10px;
-        color: #2563eb;
+        display: block;
+        color: var(--primary);
         font-size: 13px;
+        line-height: 1.5;
         word-break: break-all;
       }
 
       .toolbar {
         display: flex;
+        flex-wrap: wrap;
         gap: 10px;
-        margin: 12px 0;
+        margin-top: 16px;
       }
 
       button {
         border: none;
-        border-radius: 8px;
+        border-radius: 10px;
         padding: 10px 14px;
-        background: #111827;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
         color: #ffffff;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 13px;
+        font-weight: 600;
+        box-shadow: 0 6px 14px rgba(37, 99, 235, 0.22);
+        transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
       }
 
       button.secondary {
-        background: #4b5563;
+        background: linear-gradient(135deg, #4b5563, #374151);
+        box-shadow: 0 6px 14px rgba(55, 65, 81, 0.18);
       }
 
       button:hover {
-        opacity: 0.92;
+        opacity: 0.96;
+        transform: translateY(-1px);
       }
 
-      .status {
-        margin: 0 0 10px;
+      .status-card {
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        gap: 10px;
+      }
+
+      .status-row {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin: 0;
+      }
+
+      .status-row strong {
         font-size: 14px;
       }
 
+      .status-text {
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--text);
+      }
+
       .message {
-        min-height: 20px;
-        margin: 0 0 8px;
+        min-height: 18px;
+        margin: 0;
         font-size: 13px;
+        line-height: 1.5;
       }
 
       .message[data-type="success"] {
-        color: #047857;
+        color: var(--success);
       }
 
       .message[data-type="warn"] {
-        color: #b45309;
+        color: var(--warn);
       }
 
       .message[data-type="info"] {
-        color: #1d4ed8;
+        color: var(--info);
       }
 
       textarea {
         width: 100%;
-        height: 68px;
         padding: 10px;
-        border: 1px solid #cbd5e1;
-        border-radius: 8px;
+        border: 1px solid #d7dfeb;
+        border-radius: 12px;
         resize: none;
         font-size: 12px;
         line-height: 1.5;
         background: #f8fafc;
+        color: #111827;
       }
 
-      .sub-block {
-        margin-top: 10px;
+      .result-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 12px;
+        min-height: 0;
+      }
+
+      .result-card {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
       }
 
       .sub-title {
-        margin: 0 0 6px;
-        font-size: 13px;
+        margin: 0 0 8px;
+        font-size: 14px;
         font-weight: 700;
       }
 
       .sub-text {
-        margin: 0 0 6px;
+        margin: 0 0 8px;
         font-size: 13px;
         color: #374151;
+        line-height: 1.5;
       }
 
-      textarea.raw-response {
-        height: 56px;
+      .cookie-box {
+        height: 122px;
+      }
+
+      .raw-response {
+        height: 90px;
+      }
+
+      @media (max-width: 1100px) {
+        .panel {
+          height: 360px;
+        }
+
+        .shell {
+          grid-template-columns: 1fr;
+        }
+
+        .result-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
     <section class="panel">
-      <h1 class="title">快手小店 Cookie 获取工具</h1>
-      <p class="desc">在下方页面手动登录，登录成功后会自动尝试提取 Cookie。</p>
-      <span class="url" id="loginUrl"></span>
-      <div class="toolbar">
-        <button id="refreshBtn">手动获取 Cookie</button>
-        <button id="testBtn">测试 Cookie 有效性</button>
-        <button id="copyBtn" class="secondary">复制 Cookie</button>
-        <button id="saveBtn" class="secondary">保存到 TXT</button>
-        <button id="reloadBtn" class="secondary">重新打开登录页</button>
-      </div>
-      <p class="status"><strong>状态：</strong><span id="status">初始化中...</span></p>
-      <p class="message" id="message" data-type="info"></p>
-      <textarea id="cookieText" readonly placeholder="登录成功后，这里会显示拼接后的 Cookie 字符串"></textarea>
-      <div class="sub-block">
-        <p class="sub-title">Cookie 有效性检测</p>
-        <p class="sub-text"><strong>检测结果：</strong><span id="cookieCheckStatus">未检测</span></p>
-        <p class="sub-text" id="cookieCheckDetail">尚未执行 Cookie 有效性测试</p>
-        <textarea
-          id="cookieCheckRaw"
-          class="raw-response"
-          readonly
-          placeholder="这里会显示接口原始响应，便于排查"
-        ></textarea>
+      <div class="shell">
+        <section class="card hero">
+          <div>
+            <div class="badge">Electron Desktop Tool</div>
+            <h1 class="title">快手小店 Cookie 获取工具</h1>
+            <p class="desc">
+              在下方页面手动登录。工具会自动提取 Cookie，并支持一键检测当前登录态是否仍然有效。
+            </p>
+            <div class="link-box">
+              <p class="link-label">登录地址</p>
+              <span class="url" id="loginUrl"></span>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <button id="refreshBtn">获取 Cookie</button>
+            <button id="testBtn">检测有效性</button>
+            <button id="copyBtn" class="secondary">复制</button>
+            <button id="saveBtn" class="secondary">保存 TXT</button>
+            <button id="reloadBtn" class="secondary">重开登录页</button>
+          </div>
+        </section>
+
+        <section class="card status-card">
+          <div>
+            <p class="status-row">
+              <strong>当前状态</strong>
+              <span id="status" class="status-text">初始化中...</span>
+            </p>
+            <p class="message" id="message" data-type="info"></p>
+          </div>
+
+          <div class="result-grid">
+            <div class="result-card">
+              <p class="section-label">COOKIE 内容</p>
+              <p class="sub-title">当前 Cookie</p>
+              <textarea
+                id="cookieText"
+                class="cookie-box"
+                readonly
+                placeholder="登录成功后，这里会显示拼接后的 Cookie 字符串"
+              ></textarea>
+            </div>
+
+            <div class="result-card">
+              <p class="section-label">有效性检测</p>
+              <p class="sub-title">检测结果：<span id="cookieCheckStatus">未检测</span></p>
+              <p class="sub-text" id="cookieCheckDetail">尚未执行 Cookie 有效性测试</p>
+              <textarea
+                id="cookieCheckRaw"
+                class="raw-response"
+                readonly
+                placeholder="这里会显示接口原始响应，便于排查"
+              ></textarea>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
     <script src="./renderer.js"></script>
